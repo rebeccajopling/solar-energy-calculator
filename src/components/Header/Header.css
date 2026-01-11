@@ -1,0 +1,17 @@
+.header {
+  height: 320px;
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  align-items: flex-end;
+  padding-bottom: 4rem;
+  color: white;
+}
+
+h1 {
+  font-weight: 300;
+  font-size: 3.5rem;
+  text-align: left;
+  margin-left: 6rem;
+  line-height: 1;
+}

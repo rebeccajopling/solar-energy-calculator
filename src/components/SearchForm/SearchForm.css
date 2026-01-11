@@ -1,0 +1,37 @@
+form {
+  margin: -50px auto 1rem auto;
+  background: white;
+  border-radius: 40px;
+  padding: 3rem 6rem;
+  position: relative;
+  z-index: 10;
+}
+
+h3 {
+  font-size: 2.5rem;
+  font-weight: 300;
+  line-height: 1.2;
+}
+
+h3 .highlight {
+  color: #0f38ce;
+  font-weight: 500; /* optional, make it bolder */
+}
+
+label {
+  font-size: 1.5rem;
+}
+
+input {
+  background-color: #e3f4ff;
+  border: none;
+  border-radius: 10px;
+  padding: 15px 20px;
+  outline: none;
+}
+
+label {
+  display: block;
+  margin-top: 1.5rem;
+  margin-bottom: 0.75rem;
+}

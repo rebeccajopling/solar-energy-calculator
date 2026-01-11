@@ -1,26 +1,18 @@
-import { useState } from "react";
 import "./App.css";
 import Header from "./components/Header/Header";
 import SearchForm from "./components/SearchForm/SearchForm";
 import SolarResult from "./components/SolarResult/SolarResult";
+import { Routes, Route } from "react-router";
 
 function App() {
-  const [searchData, setSearchData] = useState(null);
-
   return (
-    <>
+    <div>
       <Header />
-      <SearchForm onSearch={setSearchData} />
-      {searchData && (
-        <SolarResult
-          postcode={searchData.postcode}
-          roofSize={searchData.roofSize}
-          roofType={searchData.roofType}
-          roofOrientation={searchData.roofOrientation}
-          shading={searchData.shading}
-        />
-      )}
-    </>
+      <Routes>
+        <Route path="/" element={<SearchForm />} />
+        <Route path="/results" element={<SolarResult />} />
+      </Routes>
+    </div>
   );
 }
 

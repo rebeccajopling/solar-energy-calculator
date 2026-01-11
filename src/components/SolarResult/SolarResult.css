@@ -1,0 +1,13 @@
+.calculated-results {
+  display: flex;
+  gap: 24px;
+  align-items: flex-start;
+}
+
+.rating {
+  flex: 0 0 60%;
+}
+
+.result-benchmarks {
+  flex: 0 0 40%;
+}
