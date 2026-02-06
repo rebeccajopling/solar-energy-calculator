@@ -1,5 +1,14 @@
 import { useState } from "react";
 import "./SearchForm.css";
+import Floor1Icon from "../../assets/solar-energy-icons-1-floor.svg";
+import Floor2Icon from "../../assets/solar-energy-icons-2-floor.svg";
+import Floor3Icon from "../../assets/solar-energy-icons-3-floor.svg";
+
+const floorIcons = {
+  1: Floor1Icon,
+  2: Floor2Icon,
+  3: Floor3Icon,
+};
 
 export default function SearchForm() {
   const [postcode, setPostcode] = useState("");
@@ -8,7 +17,7 @@ export default function SearchForm() {
   const [roofType, setRoofType] = useState("Pitched");
   const [roofOrientation, setRoofOrientation] = useState("North");
   const [shading, setShading] = useState("No Shading");
-  const [floors, setFloors] = useState(1);
+  const [floors, setFloors] = useState(null);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -46,7 +55,7 @@ export default function SearchForm() {
     <form onSubmit={handleSubmit}>
       <div>
         <h3>
-          Estimate your <br />{" "}
+          Estimate your <br className="line-break" />{" "}
           <span className="highlight">Solar Energy Potential</span>:
         </h3>
         <p>Please fill in all fields</p>
@@ -139,11 +148,45 @@ export default function SearchForm() {
         </div>
       </div>
 
+      {/* Floor Number */}
+      <div>
+        <label>How many floors do you have?</label>
+        <div className="options-grid">
+          {[1, 2, 3].map((num) => {
+            const iconSrc = floorIcons[num];
+            const isSelected = floors === num;
+
+            const floorLabelMap = {
+              1: "One Floor",
+              2: "Two Floors",
+              3: "Three or more",
+            };
+
+            return (
+              <label
+                key={num}
+                className={`option ${isSelected ? "selected" : ""}`}
+              >
+                <input
+                  type="radio"
+                  name="floors"
+                  value={num}
+                  checked={isSelected}
+                  onChange={(e) => setFloors(Number(e.target.value))}
+                />
+                <img src={iconSrc} alt={floorLabelMap[num]} />
+                <span className="options-text">{floorLabelMap[num]}</span>
+              </label>
+            );
+          })}
+        </div>
+      </div>
+
       {/* Shading */}
       <div>
         <label>How would you describe the shading?</label>
         <div>
-          {["No Shading", "Partial Shading", "Heavy Shading"].map((type) => (
+          {["Minimal Shading", "Maximum Shading"].map((type) => (
             <label key={type}>
               <input
                 type="radio"
@@ -158,24 +201,6 @@ export default function SearchForm() {
         </div>
       </div>
 
-      {/* Floor Number */}
-      <div>
-        <label>How many number of floors do you have?</label>
-        <div>
-          {[1, 2, 3].map((num) => (
-            <label key={num}>
-              <input
-                type="radio"
-                name="floors"
-                value={num}
-                checked={floors === num}
-                onChange={(e) => setFloors(Number(e.target.value))}
-              />
-              {num}
-            </label>
-          ))}
-        </div>
-      </div>
       <button type="submit">Calculate</button>
     </form>
   );

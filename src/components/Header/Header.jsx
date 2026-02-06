@@ -10,7 +10,7 @@ export default function Header() {
     >
       <h1>
         Solar Energy
-        <br /> Calculator
+        <br className="line-break" /> Calculator
       </h1>
     </div>
   );

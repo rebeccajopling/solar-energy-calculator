@@ -39,7 +39,7 @@ export default function SolarResult() {
       !roofOrientation ||
       !shading
     ) {
-      setError("Missing required parameters");
+      setError("Input data missing");
       return;
     }
 
@@ -120,27 +120,40 @@ export default function SolarResult() {
   }
 
   return (
-    <div>
-      <div className="calculated-results">
-        <div className="rating">
+    <div className="dashboard">
+      <div className="dashboard first-row">
+        <div className="card card-dark">
           <p>Your Result:</p>
-          <h3>{solarData.adjustedPotential.toFixed(0)} kWh/year</h3>
+          <h3>
+            {solarData.adjustedPotential >= 4000
+              ? "Excellent"
+              : solarData.adjustedPotential >= 3000
+              ? "Good"
+              : solarData.adjustedPotential >= 2000
+              ? "Average"
+              : "Poor"}{" "}
+            <br />
+            {solarData.adjustedPotential.toFixed(0)} kWh/year
+          </h3>
           <p>
             Calculated using local sunlight data and your roof’s specific
-            conditions, we estimate your system can produce approximately $
+            conditions, we estimate your system can produce approximately{" "}
             {solarData.adjustedPotential.toFixed(0)} kWh of solar energy
             annually.
           </p>
         </div>
-
-        <ResultBenchmarks />
+        <div className="card card-light">
+          <ResultBenchmarks />
+        </div>
       </div>
-
-      <div className="local-information">
-        <LocationInformation solarData={solarData} />
-        <Map lat={coords.lat} lng={coords.lng} />
+      <div className="dashboard second-row">
+        <div className="card card-light">
+          <LocationInformation solarData={solarData} />
+        </div>
+        <div className="card card-map">
+          <Map lat={coords.lat} lng={coords.lng} />
+        </div>
       </div>
-
       <Link to="/">Edit inputs</Link>
     </div>
   );

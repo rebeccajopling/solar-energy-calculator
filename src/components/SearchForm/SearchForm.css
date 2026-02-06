@@ -10,7 +10,7 @@ form {
 h3 {
   font-size: 2.5rem;
   font-weight: 300;
-  line-height: 1.2;
+  line-height: 1.1;
 }
 
 h3 .highlight {
@@ -34,4 +34,57 @@ label {
   display: block;
   margin-top: 1.5rem;
   margin-bottom: 0.75rem;
+}
+
+@media (min-width: 1350px) {
+  h3 {
+    font-size: 2.75rem;
+  }
+
+  form {
+    margin: -125px auto 1rem auto;
+    background: white;
+    border-radius: 60px;
+    padding: 3rem 7rem;
+  }
+}
+
+.options-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2rem;
+}
+
+.option {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+  background-color: #e3f4ff;
+  border-radius: 12px;
+  padding: 1rem;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.options-grid input {
+  display: none;
+}
+
+.options-grid img {
+  width: 120px;
+  height: 120px;
+}
+
+.option.selected {
+  background-color: #0f38ce;
+  color: white;
+}
+
+.option.selected img {
+  filter: brightness(0) invert(1);
+}
+.options-text {
+  font-size: 1.2rem;
+  margin-top: 0.5rem;
 }

@@ -3,8 +3,9 @@ import "../SolarResult.css";
 export default function ResultBenchmarks() {
   return (
     <div className="result-benchmarks">
-      <h4>Result Benchmarks</h4>
-      <h4>(kWh/year)</h4>
+      <h4>
+        Result Benchmarks <br /> (kWh/year)
+      </h4>
 
       <table>
         <tbody>
