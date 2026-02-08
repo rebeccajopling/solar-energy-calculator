@@ -1,21 +1,46 @@
 import { useState } from "react";
 import "./SearchForm.css";
+import FlatIcon from "../../assets/solar-energy-icons-flat-roof.svg";
+import PitchedIcon from "../../assets/solar-energy-icons-pitched-roof.svg";
 import Floor1Icon from "../../assets/solar-energy-icons-1-floor.svg";
 import Floor2Icon from "../../assets/solar-energy-icons-2-floor.svg";
 import Floor3Icon from "../../assets/solar-energy-icons-3-floor.svg";
+import NorthIcon from "../../assets/solar-energy-icons-north.svg";
+import SouthIcon from "../../assets/solar-energy-icons-south.svg";
+import EastIcon from "../../assets/solar-energy-icons-east.svg";
+import WestIcon from "../../assets/solar-energy-icons-west.svg";
+import MinShadingIcon from "../../assets/solar-energy-icons-minimal-shading.svg";
+import MaxShadingIcon from "../../assets/solar-energy-icons-maximum-shading.svg";
+
+const roofTypeIcons = {
+  Flat: FlatIcon,
+  Pitched: PitchedIcon,
+};
 
 const floorIcons = {
-  1: Floor1Icon,
-  2: Floor2Icon,
-  3: Floor3Icon,
+  "One Floor": Floor1Icon,
+  "Two Floors": Floor2Icon,
+  "Three or More": Floor3Icon,
+};
+
+const orientationIcons = {
+  North: NorthIcon,
+  South: SouthIcon,
+  East: EastIcon,
+  West: WestIcon,
+};
+
+const shadingIcons = {
+  "Minimal Shading": MinShadingIcon,
+  "Maximum Shading": MaxShadingIcon,
 };
 
 export default function SearchForm() {
   const [postcode, setPostcode] = useState("");
   const [electricityRate, setElectricityRate] = useState("");
   const [roofSize, setRoofSize] = useState("");
-  const [roofType, setRoofType] = useState("Pitched");
-  const [roofOrientation, setRoofOrientation] = useState("North");
+  const [roofType, setRoofType] = useState(null);
+  const [roofOrientation, setRoofOrientation] = useState(null);
   const [shading, setShading] = useState("No Shading");
   const [floors, setFloors] = useState(null);
 
@@ -113,38 +138,56 @@ export default function SearchForm() {
       {/* Roof Type */}
       <div>
         <label>What type of roof do you have?</label>
-        <div>
-          {["Pitched", "Flat"].map((type) => (
-            <label key={type}>
-              <input
-                type="radio"
-                name="roofType"
-                value={type}
-                checked={roofType === type}
-                onChange={(e) => setRoofType(e.target.value)}
-              />
-              {type}
-            </label>
-          ))}
+        <div className="options-grid">
+          {["Flat", "Pitched"].map((type) => {
+            const iconSrc = roofTypeIcons[type];
+            const isSelected = roofType === type;
+
+            return (
+              <label
+                key={type}
+                className={`option ${isSelected ? "selected" : ""}`}
+              >
+                <input
+                  type="radio"
+                  name="rooftype"
+                  value={type}
+                  checked={isSelected}
+                  onChange={(e) => setRoofType(e.target.value)}
+                />
+                <img src={iconSrc} alt={type} />
+                <span className="options-text">{type}</span>
+              </label>
+            );
+          })}
         </div>
       </div>
 
       {/* Roof Orientation */}
       <div>
         <label>What is your roof orientation?</label>
-        <div>
-          {["North", "South", "East", "West"].map((type) => (
-            <label key={type}>
-              <input
-                type="radio"
-                name="roofOrientation"
-                value={type}
-                checked={roofOrientation === type}
-                onChange={(e) => setRoofOrientation(e.target.value)}
-              />
-              {type}
-            </label>
-          ))}
+        <div className="options-grid">
+          {["North", "South", "East", "West"].map((orientation) => {
+            const iconSrc = orientationIcons[orientation];
+            const isSelected = roofOrientation === orientation;
+
+            return (
+              <label
+                key={orientation}
+                className={`option ${isSelected ? "selected" : ""}`}
+              >
+                <input
+                  type="radio"
+                  name="orientation"
+                  value={orientation}
+                  checked={isSelected}
+                  onChange={(e) => setRoofOrientation(e.target.value)}
+                />
+                <img src={iconSrc} alt={orientation} />
+                <span className="options-text">{orientation}</span>
+              </label>
+            );
+          })}
         </div>
       </div>
 
@@ -152,15 +195,9 @@ export default function SearchForm() {
       <div>
         <label>How many floors do you have?</label>
         <div className="options-grid">
-          {[1, 2, 3].map((num) => {
+          {["One Floor", "Two Floors", "Three or More"].map((num) => {
             const iconSrc = floorIcons[num];
             const isSelected = floors === num;
-
-            const floorLabelMap = {
-              1: "One Floor",
-              2: "Two Floors",
-              3: "Three or more",
-            };
 
             return (
               <label
@@ -172,10 +209,10 @@ export default function SearchForm() {
                   name="floors"
                   value={num}
                   checked={isSelected}
-                  onChange={(e) => setFloors(Number(e.target.value))}
+                  onChange={(e) => setFloors(e.target.value)}
                 />
-                <img src={iconSrc} alt={floorLabelMap[num]} />
-                <span className="options-text">{floorLabelMap[num]}</span>
+                <img src={iconSrc} alt={num} />
+                <span className="options-text">{num}</span>
               </label>
             );
           })}
@@ -185,23 +222,34 @@ export default function SearchForm() {
       {/* Shading */}
       <div>
         <label>How would you describe the shading?</label>
-        <div>
-          {["Minimal Shading", "Maximum Shading"].map((type) => (
-            <label key={type}>
-              <input
-                type="radio"
-                name="shading"
-                value={type}
-                checked={shading === type}
-                onChange={(e) => setShading(e.target.value)}
-              />
-              {type}
-            </label>
-          ))}
+        <div className="options-grid">
+          {["Minimal Shading", "Maximum Shading"].map((type) => {
+            const iconSrc = shadingIcons[type];
+            const isSelected = shading === type;
+
+            return (
+              <label
+                key={type}
+                className={`option ${isSelected ? "selected" : ""}`}
+              >
+                <input
+                  type="radio"
+                  name="shading"
+                  value={type}
+                  checked={isSelected}
+                  onChange={(e) => setShading(e.target.value)}
+                />
+                <img src={iconSrc} alt={type} />
+                <span className="options-text">{type}</span>
+              </label>
+            );
+          })}
         </div>
       </div>
 
-      <button type="submit">Calculate</button>
+      <button type="submit" className="submit">
+        Calculate
+      </button>
     </form>
   );
 }

@@ -1,5 +1,5 @@
 .dashboard {
-  margin: -50px auto 1rem auto;
+  margin: -50px auto 2rem auto;
   background: white;
   border-radius: 40px;
   padding: 0rem 3rem;
@@ -12,13 +12,13 @@
   padding-bottom: 3rem;
   display: grid;
   grid-template-columns: 3fr 2fr;
-  gap: 1rem;
+  gap: 2rem;
 }
 
 .second-row {
   display: grid;
   grid-template-columns: 2fr 2fr;
-  gap: 1rem;
+  gap: 2rem;
 }
 
 .card {

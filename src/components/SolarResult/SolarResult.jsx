@@ -49,7 +49,7 @@ export default function SolarResult() {
         const geoRes = await fetch(
           `https://maps.googleapis.com/maps/api/geocode/json?address=${postcode}&key=${
             import.meta.env.VITE_GOOGLE_API_KEY
-          }`
+          }`,
         );
 
         const geoData = await geoRes.json();
@@ -64,7 +64,7 @@ export default function SolarResult() {
 
         // PVGIS data
         const pvgisRes = await fetch(
-          `http://localhost:3001/api/solar?lat=${lat}&lon=${lng}`
+          `http://localhost:3001/api/solar?lat=${lat}&lon=${lng}`,
         );
         const pvgisData = await pvgisRes.json();
 
@@ -86,11 +86,7 @@ export default function SolarResult() {
           North: 0.8,
         }[roofOrientation];
 
-        const shadingFactor = {
-          "No Shading": 1,
-          "Partial Shading": 0.85,
-          "Heavy Shading": 0.7,
-        }[shading];
+        const shadingFactor = shading === "Minimal Shading" ? 1 : 0.7;
 
         const adjustedPotential =
           basePotential * roofTypeFactor * orientationFactor * shadingFactor;
@@ -128,10 +124,10 @@ export default function SolarResult() {
             {solarData.adjustedPotential >= 4000
               ? "Excellent"
               : solarData.adjustedPotential >= 3000
-              ? "Good"
-              : solarData.adjustedPotential >= 2000
-              ? "Average"
-              : "Poor"}{" "}
+                ? "Good"
+                : solarData.adjustedPotential >= 2000
+                  ? "Average"
+                  : "Poor"}{" "}
             <br />
             {solarData.adjustedPotential.toFixed(0)} kWh/year
           </h3>

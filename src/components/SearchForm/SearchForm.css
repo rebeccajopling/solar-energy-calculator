@@ -19,7 +19,7 @@ h3 .highlight {
 }
 
 label {
-  font-size: 1.5rem;
+  font-size: 1.25rem;
 }
 
 input {
@@ -72,8 +72,8 @@ label {
 }
 
 .options-grid img {
-  width: 120px;
-  height: 120px;
+  width: 125px;
+  height: 125px;
 }
 
 .option.selected {
@@ -85,6 +85,17 @@ label {
   filter: brightness(0) invert(1);
 }
 .options-text {
-  font-size: 1.2rem;
+  font-size: 1.1rem;
   margin-top: 0.5rem;
+}
+
+.submit {
+  font-size: 1.1rem;
+  appearance: none;
+  margin-top: 1rem;
+  color: white;
+  background: #0f38ce;
+  padding: 1.5rem 4rem;
+  border: none;
+  border-radius: 50px;
 }
