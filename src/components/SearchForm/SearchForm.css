@@ -1,14 +1,22 @@
 form {
-  margin: -50px auto 1rem auto;
   background: white;
   border-radius: 40px;
-  padding: 3rem 6rem;
-  position: relative;
-  z-index: 10;
+  width: 70%;
+  max-width: 1000px;
+  height: 80vh;
+  padding: 3rem 4rem;
+  overflow-y: auto;
+  box-sizing: border-box;
+}
+
+h1 {
+  font-size: 3.5rem;
+  font-weight: 300;
+  line-height: 1.1;
 }
 
 h3 {
-  font-size: 2.5rem;
+  font-size: 1.5rem;
   font-weight: 300;
   line-height: 1.1;
 }
@@ -34,19 +42,6 @@ label {
   display: block;
   margin-top: 1.5rem;
   margin-bottom: 0.75rem;
-}
-
-@media (min-width: 1350px) {
-  h3 {
-    font-size: 2.75rem;
-  }
-
-  form {
-    margin: -125px auto 1rem auto;
-    background: white;
-    border-radius: 60px;
-    padding: 3rem 7rem;
-  }
 }
 
 .options-grid {
@@ -87,15 +82,4 @@ label {
 .options-text {
   font-size: 1.1rem;
   margin-top: 0.5rem;
-}
-
-.submit {
-  font-size: 1.1rem;
-  appearance: none;
-  margin-top: 1rem;
-  color: white;
-  background: #0f38ce;
-  padding: 1.5rem 4rem;
-  border: none;
-  border-radius: 50px;
 }

@@ -3,7 +3,9 @@ import { useState, useEffect } from "react";
 import "./SolarResult.css";
 import Map from "./Map/Map";
 import ResultBenchmarks from "./ResultBenchmarks/ResultBenchmarks";
-import LocationInformation from "./LocationInformation/LocationInformation";
+import ReturnOnInvestment from "./ReturnOnInvestment/ReturnOnInvestment";
+import Irradiance from "./Irradiance/Irradiance";
+import EnergyOutput from "./EnergyOutput/EnergyOutput";
 
 export default function SolarResult() {
   const [params] = useSearchParams();
@@ -14,7 +16,6 @@ export default function SolarResult() {
   const data = {
     postcode: params.get("postcode"),
     roofSize: Number(params.get("roofSize")),
-    electricityRate: Number(params.get("electricityRate")),
     roofType: params.get("roofType"),
     roofOrientation: params.get("roofOrientation"),
     shading: params.get("shading"),
@@ -22,23 +23,9 @@ export default function SolarResult() {
   };
 
   useEffect(() => {
-    const {
-      postcode,
-      electricityRate,
-      roofSize,
-      roofType,
-      roofOrientation,
-      shading,
-    } = data;
+    const { postcode, roofSize, roofType, roofOrientation, shading } = data;
 
-    if (
-      !postcode ||
-      !electricityRate ||
-      !roofSize ||
-      !roofType ||
-      !roofOrientation ||
-      !shading
-    ) {
+    if (!postcode || !roofSize || !roofType || !roofOrientation || !shading) {
       setError("Input data missing");
       return;
     }
@@ -117,40 +104,52 @@ export default function SolarResult() {
 
   return (
     <div className="dashboard">
-      <div className="dashboard first-row">
-        <div className="card card-dark">
-          <p>Your Result:</p>
-          <h3>
-            {solarData.adjustedPotential >= 4000
-              ? "Excellent"
-              : solarData.adjustedPotential >= 3000
-                ? "Good"
-                : solarData.adjustedPotential >= 2000
-                  ? "Average"
-                  : "Poor"}{" "}
-            <br />
-            {solarData.adjustedPotential.toFixed(0)} kWh/year
-          </h3>
-          <p>
-            Calculated using local sunlight data and your roof’s specific
-            conditions, we estimate your system can produce approximately{" "}
-            {solarData.adjustedPotential.toFixed(0)} kWh of solar energy
-            annually.
-          </p>
-        </div>
-        <div className="card card-light">
-          <ResultBenchmarks />
+      <div className="grid-top-left">
+        <Link className="link" to="/">
+          Edit Inputs
+        </Link>
+        <div className="first-row">
+          <div className="result">
+            <h1>Your Solar Results</h1>
+            <h3>
+              {solarData.adjustedPotential >= 4000
+                ? "Excellent"
+                : solarData.adjustedPotential >= 3000
+                  ? "Good"
+                  : solarData.adjustedPotential >= 2000
+                    ? "Average"
+                    : "Poor"}{" "}
+              <br />
+              {solarData.adjustedPotential.toFixed(0)} kWh/year
+            </h3>
+            <p>
+              Calculated using local sunlight data and your roof’s specific
+              conditions, we estimate your system can produce approximately{" "}
+              {solarData.adjustedPotential.toFixed(0)} kWh of solar energy
+              annually.
+            </p>
+          </div>
         </div>
       </div>
-      <div className="dashboard second-row">
-        <div className="card card-light">
-          <LocationInformation solarData={solarData} />
+      <div className="grid-bottom-left">
+        <div className="card">
+          <ResultBenchmarks />
         </div>
         <div className="card card-map">
           <Map lat={coords.lat} lng={coords.lng} />
         </div>
+        <div className="card">
+          <EnergyOutput solarData={solarData} />
+        </div>
+        <div className="card">
+          <Irradiance solarData={solarData} />
+        </div>
       </div>
-      <Link to="/">Edit inputs</Link>
+      <div className="grid-right">
+        <div className="card">
+          <ReturnOnInvestment />
+        </div>
+      </div>
     </div>
   );
 }

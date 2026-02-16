@@ -1,13 +1,15 @@
 import "./App.css";
-import Header from "./components/Header/Header";
 import SearchForm from "./components/SearchForm/SearchForm";
 import SolarResult from "./components/SolarResult/SolarResult";
 import { Routes, Route } from "react-router";
+import backgroundImage from "./assets/detail-shot-patterned-wall_09.png";
 
 function App() {
   return (
-    <div>
-      <Header />
+    <div
+      className="app-background"
+      style={{ backgroundImage: `url(${backgroundImage})` }}
+    >
       <Routes>
         <Route path="/" element={<SearchForm />} />
         <Route path="/results" element={<SolarResult />} />
