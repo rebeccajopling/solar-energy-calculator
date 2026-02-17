@@ -9,7 +9,7 @@ The backend is built with Express and fetches data from Google Geocoding and PVG
 
 #### 1. Custom Property Input
 
-Capture user-specific property attributes:
+Users can enter their unique property details:
 
 - Postcode
 - Roof size (m²)
@@ -32,14 +32,16 @@ Property characteristics are combined with local solar irradiance data to genera
 
 #### 5. Results
 
-- Overall solar potential rating (with metric breakdown)
+Users can view their:
+
+- Overall solar potential rating (with a metric breakdown)
 - Annual energy production estimate
 - Local irradiance and energy output data
 - Property location map
 
 #### 6. Estimated ROI _(WIP)_
 
-Allow users to input current energy costs to estimate:
+Users can input their current energy costs to estimate:
 
 - Potential annual savings
 - Estimated payback period
