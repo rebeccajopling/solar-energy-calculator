@@ -7,35 +7,44 @@ The backend is built with Express and fetches data from Google Geocoding and PVG
 
 ---
 
-#### Custom Property Input
+#### 1. Custom Property Input
 
-Users enter detailed property information, including postcode, roof size, roof type, roof orientation, number of floors, and shading level.
+Capture user-specific property attributes:
 
-#### Accurate Location Mapping
+- Postcode
+- Roof size (m²)
+- Roof type
+- Roof orientation
+- Number of floors
+- Shading level
 
-The postcode is converted into precise latitude and longitude coordinates using the Google Geocoding API.
+#### 2. Geolocation Mapping
 
-#### Real-Time Solar Data Integration
+The postcode is converted into precise latitude and longitude coordinates using the Google Geocoding API
 
-Location-specific solar irradiance data is retrieved from the PVGIS API.
+#### 3. Solar Irradiance Data
 
-#### Personalised Energy Output Calculation
+Location-specific solar irradiance data is fetched from the PVGIS API
 
-Property characteristics are combined with local solar irradiance data to generate an estimated annual solar energy output (kWh/year).
+#### 4. Solar Output Calculation
 
-#### Comprehensive Solar Insights
+Property characteristics are combined with local solar irradiance data to generate an estimated annual solar energy output (kWh/year)
 
-Users can view:
+#### 5. Results
 
-- Overall solar potential rating (with an breakdown of rating metrics)
-- Estimated annual energy production
-- Local solar irradiance and energy output metrics
-- A map showing their property location
+- Overall solar potential rating (with metric breakdown)
+- Annual energy production estimate
+- Local irradiance and energy output data
+- Property location map
 
-#### Return on Investment (Work in Progress)
+#### 6. Estimated ROI _(WIP)_
 
-Users can enter their current energy costs to estimate potential financial savings and calculate the expected payback period for installing solar panels.
-<br>
+Allow users to input current energy costs to estimate:
+
+- Potential annual savings
+- Estimated payback period
+- Return on investment
+  <br>
 
 ### Tech Stack
 
