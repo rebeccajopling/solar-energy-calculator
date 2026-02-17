@@ -80,15 +80,20 @@ export default function SearchForm() {
   };
 
   return (
-    <div>
+    <div className="container">
       <div className="title">
-        <h1>Solar Energy Calculator</h1>
+        <h1>
+          Solar Energy
+          <br />
+          Calculator
+        </h1>
         <h3>
-          Estimate your <br className="line-break" />{" "}
-          <span className="highlight">Solar Energy Potential</span>:
+          Estimate your
+          <br />
+          Solar Energy Potential
         </h3>
       </div>
-      <div>
+      <div className="form-wrapper">
         <form onSubmit={handleSubmit}>
           <div>
             <p>Please fill in all fields</p>
