@@ -7,25 +7,42 @@ The backend is built with Express and fetches data from Google Geocoding and PVG
 
 ---
 
-- Users can enter their unique property details, including postcode, roof size, roof type, roof orientation, number of - Users can enter their unique property details, including postcode, roof size, roof type, roof orientation, number of floors, and shading level.
-- The user’s postcode is converted into precise latitude and longitude coordinates using the Google Geocoding API.
-- Location-based solar irradiance data is pulled from the PVGIS API.
-- The user’s property characteristics are combined with the local solar irradiance data to calculate an estimated annual solar energy output in kWh/year
-- Users can view their:
-  - Overall solar potential rating (with a guide to rating metrics)
-  - Annual energy production estimate
-  - Local irradiance metrics
-  - Energy output breakdown
-  - A map showing their property location
-  - Return on Investment (Feature WIP) where users can enter their current energy rating to estimate the potential financial savings and payback period of investing in solar panels.
-    <br>
+#### Custom Property Input
+
+Users enter detailed property information, including postcode, roof size, roof type, roof orientation, number of floors, and shading level.
+
+#### Accurate Location Mapping
+
+The postcode is converted into precise latitude and longitude coordinates using the Google Geocoding API.
+
+#### Real-Time Solar Data Integration
+
+Location-specific solar irradiance data is retrieved from the PVGIS API.
+
+#### Personalised Energy Output Calculation
+
+Property characteristics are combined with local solar irradiance data to generate an estimated annual solar energy output (kWh/year).
+
+#### Comprehensive Solar Insights
+
+Users can view:
+
+- Overall solar potential rating (with an breakdown of rating metrics)
+- Estimated annual energy production
+- Local solar irradiance and energy output metrics
+- A map showing their property location
+
+#### Return on Investment (Work in Progress)
+
+Users can enter their current energy costs to estimate potential financial savings and calculate the expected payback period for installing solar panels.
+<br>
 
 ### Tech Stack
 
 ---
 
 - Javascript
-- React, React Router, Vite
+- React and React Router, Vite
 - CSS
 - Express
 - Axios
