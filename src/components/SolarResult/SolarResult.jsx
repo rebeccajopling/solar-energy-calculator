@@ -124,9 +124,10 @@ export default function SolarResult() {
             </h3>
             <p>
               Calculated using local sunlight data and your roof’s specific
-              conditions, we estimate your system can produce approximately{" "}
-              {solarData.adjustedPotential.toFixed(0)} kWh of solar energy
-              annually.
+              conditions,
+              <br /> we estimate your system can produce approximately{" "}
+              {solarData.adjustedPotential.toFixed(0)} kWh of solar
+              <br /> energy annually.
             </p>
           </div>
         </div>
@@ -146,7 +147,7 @@ export default function SolarResult() {
         </div>
       </div>
       <div className="grid-right">
-        <div className="card">
+        <div className="card card-roi">
           <ReturnOnInvestment />
         </div>
       </div>

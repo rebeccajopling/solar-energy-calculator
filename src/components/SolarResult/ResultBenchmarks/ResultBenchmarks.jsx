@@ -41,11 +41,6 @@ export default function ResultBenchmarks() {
             <td style={{ textAlign: "left" }}>Poor</td>
             <td style={{ textAlign: "right" }}>&lt; 2000</td>
           </tr>
-          <tr>
-            <td colSpan="2">
-              <hr />
-            </td>
-          </tr>
         </tbody>
       </table>
     </div>
