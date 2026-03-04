@@ -7,59 +7,50 @@ const app = express();
 app.use(
   cors({
     origin: "http://localhost:5173",
-  })
+  }),
 );
 
 app.get("/api/solar", async (req, res) => {
   try {
-    const { lat, lon } = req.query;
+    const { postcode } = req.query;
 
-    if (!lat || !lon) {
-      return res.status(400).json({ error: "Missing lat or lon" });
+    if (!postcode) {
+      return res.status(400).json({ error: "Postcode is required" });
     }
 
-    const url = `https://re.jrc.ec.europa.eu/api/v5_3/PVcalc?lat=${lat}&lon=${lon}&peakpower=1&loss=14&tracking=0&angle=35&aspect=180&outputformat=json`;
+    // Fetch lat/lon from postcodes.io
+    const geoRes = await axios.get(
+      `https://api.postcodes.io/postcodes/${encodeURIComponent(postcode)}`,
+    );
 
-    let response;
-    try {
-      response = await axios.get(url, {
-        transformResponse: [(data) => data],
-      });
-    } catch (err) {
-      console.error("PVGIS request failed:", err.response?.data || err.message);
-      return res.status(500).json({
-        error: "PVGIS API error",
-        raw: err.response?.data || err.message,
-      });
+    if (!geoRes.data.result) {
+      return res.status(400).json({ error: "Invalid postcode" });
     }
 
-    const text = response.data;
-    console.log("PVGIS raw response:", text);
+    const latitude = geoRes.data.result.latitude;
+    const longitude = geoRes.data.result.longitude;
 
-    let data;
-    try {
-      data = JSON.parse(text);
-    } catch (error) {
-      console.error("Failed to parse PVGIS response:", error);
-      return res.status(500).json({ error: "Invalid PVGIS JSON", raw: text });
+    // fetch PVGIS data
+    const url = `https://re.jrc.ec.europa.eu/api/v5_3/PVcalc?lat=${latitude}&lon=${longitude}&peakpower=1&loss=14&tracking=0&angle=35&aspect=180&outputformat=json`;
+
+    const response = await axios.get(url);
+
+    if (!response.data.inputs?.location) {
+      return res.status(500).json({ error: "Invalid PVGIS data" });
     }
 
-    if (!data.inputs || !data.inputs.location) {
-      console.warn("PVGIS returned unexpected structure:", data);
-      return res.status(500).json({
-        error: "PVGIS returned invalid data",
-        raw: data,
-      });
-    }
-
-    res.json(data);
+    res.json({
+      solar: response.data,
+      latitude,
+      longitude,
+    });
   } catch (error) {
-    console.error("Server error:", error);
+    console.error("Server error:", error.message);
     res.status(500).json({ error: "Server error" });
   }
 });
 
 const PORT = 3001;
 app.listen(PORT, () =>
-  console.log(`Server running on http://localhost:${PORT}`)
+  console.log(`Server running on http://localhost:${PORT}`),
 );

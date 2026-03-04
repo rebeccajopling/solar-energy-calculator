@@ -32,33 +32,26 @@ export default function SolarResult() {
 
     const fetchData = async () => {
       try {
-        // Google data
-        const geoRes = await fetch(
-          `https://maps.googleapis.com/maps/api/geocode/json?address=${postcode}&key=${
-            import.meta.env.VITE_GOOGLE_API_KEY
-          }`,
+        // fetch everything from server
+        const res = await fetch(
+          `http://localhost:3001/api/solar?postcode=${encodeURIComponent(postcode)}`,
         );
 
-        const geoData = await geoRes.json();
+        const json = await res.json();
 
-        if (!geoData.results?.length) {
-          setError("No coordinates found for this postcode");
+        if (json.error) {
+          setError(json.error);
           return;
         }
 
-        const { lat, lng } = geoData.results[0].geometry.location;
+        const { latitude: lat, longitude: lng, solar } = json;
         setCoords({ lat, lng });
 
-        // PVGIS data
-        const pvgisRes = await fetch(
-          `http://localhost:3001/api/solar?lat=${lat}&lon=${lng}`,
-        );
-        const pvgisData = await pvgisRes.json();
-
-        const dailyIrradiance = pvgisData.outputs.totals.fixed["H(i)_d"];
-        const yearlyIrradiance = pvgisData.outputs.totals.fixed["H(i)_y"];
-        const dailyEnergyOutput = pvgisData.outputs.totals.fixed["E_d"];
-        const yearlyEnergyOutput = pvgisData.outputs.totals.fixed["E_y"];
+        // PVGIS data is now inside solar.data
+        const dailyIrradiance = solar.outputs.totals.fixed["H(i)_d"];
+        const yearlyIrradiance = solar.outputs.totals.fixed["H(i)_y"];
+        const dailyEnergyOutput = solar.outputs.totals.fixed["E_d"];
+        const yearlyEnergyOutput = solar.outputs.totals.fixed["E_y"];
 
         // Calculations
         const maxPowerOutputKw = roofSize * 0.2;
@@ -105,9 +98,6 @@ export default function SolarResult() {
   return (
     <div className="dashboard">
       <div className="grid-top-left">
-        <Link className="link" to="/">
-          Edit Inputs
-        </Link>
         <div className="first-row">
           <div className="result">
             <h1>Your Solar Results</h1>
@@ -124,11 +114,13 @@ export default function SolarResult() {
             </h3>
             <p>
               Calculated using local sunlight data and your roof’s specific
-              conditions,
-              <br /> we estimate your system can produce approximately{" "}
-              {solarData.adjustedPotential.toFixed(0)} kWh of solar
-              <br /> energy annually.
+              conditions, we estimate your system can produce approximately{" "}
+              {solarData.adjustedPotential.toFixed(0)} kWh of solar energy
+              annually.
             </p>
+            <Link className="link" to="/">
+              Edit Inputs
+            </Link>
           </div>
         </div>
       </div>

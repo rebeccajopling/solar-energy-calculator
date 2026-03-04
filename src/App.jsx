@@ -1,8 +1,8 @@
-import "./App.css";
+import { Routes, Route } from "react-router";
 import SearchForm from "./components/SearchForm/SearchForm";
 import SolarResult from "./components/SolarResult/SolarResult";
-import { Routes, Route } from "react-router";
-import backgroundImage from "./assets/detail-shot-patterned-wall_09.png";
+import backgroundImage from "./assets/detail-shot-patterned-wall_1920x1080.png";
+import "./App.css";
 
 function App() {
   return (
