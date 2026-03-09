@@ -1,6 +1,8 @@
 A full-stack solar energy calculator designed to estimate a UK home's solar energy generation potential using location, roof characteristics, and real-world solar irradiance data.
 
-The backend is built with Express and fetches data from Google Geocoding and PVGIS APIs. The front end is built with React + Vite.
+The application integrates Postcodes.io for postcode geocoding, PVGIS for solar irradiation data, and the Google Maps JavaScript API to visualise the property location on an interactive map. The backend is built with Node.js and Express, while the frontend is built with React and Vite.
+
+Solar estimates are calculated by combining PVGIS irradiance data with user inputs such as roof size, roof orientation, roof type, and shading conditions to produce an adjusted annual energy output estimate.
 <br>
 
 ### Key Features
@@ -9,7 +11,7 @@ The backend is built with Express and fetches data from Google Geocoding and PVG
 
 #### 1. Custom Property Input
 
-Users can enter their unique property details:
+Users enter their unique property details:
 
 - Postcode
 - Roof size (m²)
@@ -20,11 +22,11 @@ Users can enter their unique property details:
 
 #### 2. Geolocation Mapping
 
-The postcode is converted into precise latitude and longitude coordinates using the Google Geocoding API
+The user's postcode is converted into precise latitude and longitude coordinates using the Postcodes.io API
 
 #### 3. Solar Irradiance Data
 
-Location-specific solar irradiance data is fetched from the PVGIS API
+Location-specific solar irradiance data is fetched from the PVGIS API using the coordinates
 
 #### 4. Solar Output Calculation
 
@@ -37,7 +39,7 @@ Users can view their:
 - Overall solar potential rating (with a metric breakdown)
 - Annual energy production estimate
 - Local irradiance and energy output data
-- Property location map
+- Property location visualised on an interactive Google Maps map
 
 #### 6. Estimated ROI _(WIP)_
 
@@ -52,11 +54,21 @@ Users can input their current energy costs to estimate:
 
 ---
 
+Frontend
+
 - Javascript
 - React and React Router, Vite
 - CSS
+- Google Maps Javascript API
+
+Backend
+
+- Node.js
 - Express
 - Axios
 - CORS
-- Google Geocoding API
+
+APIs
+
+- Postcodes.io API (postcode → lat/lon geocoding)
 - PVGIS Solar Radiation API
