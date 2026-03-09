@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router";
 import "./SearchForm.css";
 import FlatIcon from "../../assets/solar-energy-icons-flat-roof.svg";
 import PitchedIcon from "../../assets/solar-energy-icons-pitched-roof.svg";
@@ -48,6 +49,7 @@ export default function SearchForm() {
   const [roofOrientation, setRoofOrientation] = useState(null);
   const [floors, setFloors] = useState(null);
   const [shading, setShading] = useState(null);
+  const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -76,7 +78,7 @@ export default function SearchForm() {
 
     // Navigate to results page with query params
     const query = new URLSearchParams(data).toString();
-    window.location.href = `/results?${query}`;
+    navigate(`/results?${query}`);
   };
 
   return (

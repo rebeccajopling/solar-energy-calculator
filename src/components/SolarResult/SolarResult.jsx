@@ -140,7 +140,7 @@ export default function SolarResult() {
       </div>
       <div className="grid-right">
         <div className="card card-roi">
-          <ReturnOnInvestment />
+          <ReturnOnInvestment solarData={solarData} />
         </div>
       </div>
     </div>
